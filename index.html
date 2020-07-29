@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item" id="card-mobil">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button onclick="handealProdactMobil(false)" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="mobil-Input" type="text" class="form-control text-center" value="1">
+                           <button onclick="handealProdactMobil(true)" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5>$ <span id="mobilePrice">1219</span></h5>
+                        <img id="remove" src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button onclick="handealProdaCtase(false)" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="case-Input" type="text" class="form-control text-center" value="1">
+                           <button onclick="handealProdaCtase(true)" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5>$ <Span id="casePrice">59</Span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5>$ <span id="subtotalAmount">1,278</span></h5>
+                        <h5>$ <span id="taxAmount">0</span></h5>
+                        <h5>$ <span id="totalAmount">1,278</span></h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <script>
+
+   
+
+
+     function handealProdactMobil(isIncrease){
+      const mobilInput = document.getElementById('mobil-Input').value;
+        const mobilInputNum = parseInt(mobilInput);
+        let mobilNewCount = mobilInputNum;
+        if (isIncrease == true) {
+             mobilNewCount = mobilInputNum + 1;
+        }
+        if (isIncrease == false && mobilNewCount > 0) {
+            mobilNewCount = mobilInputNum - 1;
+        }
+        document.getElementById('mobil-Input').value = mobilNewCount;
+
+        const mobilePrice = document.getElementById('mobilePrice').innerText;
+        const mobilPriceNum = parseInt(mobilePrice);
+        const mobilPriceValue = mobilNewCount * 1219;
+        document.getElementById('mobilePrice').innerText = mobilPriceValue;
+        subAmount();
+     }
+
+     function handealProdaCtase(isIncrease){
+      const caseInput = document.getElementById('case-Input').value;
+        const caseInputNum = parseInt(caseInput);
+        let caseNewCount = caseInputNum;
+        if (isIncrease == true) {
+          caseNewCount = caseInputNum + 1;
+        }
+        if (isIncrease == false && caseNewCount > 0) {
+          caseNewCount = caseInputNum - 1;
+        }
+        document.getElementById('case-Input').value = caseNewCount;
+
+        const casePrice = document.getElementById('casePrice').innerText;
+        const casePriceNum = parseInt(casePrice);
+        const casePriceValue = caseNewCount * 59;
+        document.getElementById('casePrice').innerText = casePriceValue;
+        subAmount();
+     }
+     function subAmount(){
+        const mobileCount = document.getElementById('mobil-Input');
+         const mobilNum = parseInt(mobileCount.value);
+
+         const caseInput = document.getElementById('case-Input');
+         const caseNum = parseInt(caseInput.value);
+
+         const totalCount = mobilNum * 1219 + caseNum * 59;
+         document.getElementById('subtotalAmount').innerText = totalCount;
+
+         const tax = Math.round(totalCount * 0.1)
+         document.getElementById('taxAmount').innerText = tax;
+
+         const total = tax + totalCount;
+         document.getElementById('totalAmount').innerText = total;
+     }
+   //   const removeBtn = document.getElementById('remove');
+   //   removeBtn.addEventListener("click", function(){
+   //    const remove = document.getElementById('card-mobil');
+   //    remove.style.display = "none";
+   //   })
+   //   function handealProdactCase(isIncrease){
+   //    const mobilInput = document.getElementById('mobil-Input').value;
+   //      const mobilInputNum = parseInt(mobilInput);
+   //      let mobilNewCount = mobilInputNum;
+   //      if (isIncrease == true) {
+   //           mobilNewCount = mobilInputNum + 1;
+   //      }
+   //      if (isIncrease == false && mobilNewCount > 0) {
+   //          mobilNewCount = mobilInputNum - 1;
+   //      }
+   //      document.getElementById('mobil-Input').value = mobilNewCount;
+
+   //      const mobilePrice = document.getElementById('mobilePrice').innerText;
+   //      const mobilPriceNum = parseInt(mobilePrice);
+   //      const mobilPriceValue = mobilNewCount * 1219;
+   //      document.getElementById('mobilePrice').innerText = mobilPriceValue;
+   //    const mobilHandalerPlus = document.getElementById('mobil-Plus').addEventListener("click", function(){
+   //      const mobilInput = document.getElementById('mobil-Input').value;
+   //      const mobilInputNum = parseInt(mobilInput);
+   //      const mobilValue = mobilInputNum + 1;
+   //      document.getElementById('mobil-Input').value = mobilValue;
+
+   //      const mobilePrice = document.getElementById('mobilePrice').innerText;
+   //      const mobilPriceNum = parseInt(mobilePrice);
+   //      const mobilPriceValue = mobilValue * 1219;
+   //      document.getElementById('mobilePrice').innerText = mobilPriceValue;
+   //   })
+
+   //   const mobilHandalerMinus = document.getElementById('mobil-Minus').addEventListener("click", function(){
+   //      const mobilInput = document.getElementById('mobil-Input').value;
+   //      const mobilInputNum = parseInt(mobilInput);
+   //      const mobilValue = mobilInputNum - 1;
+   //      document.getElementById('mobil-Input').value = mobilValue;
+
+   //      const mobilePrice = document.getElementById('mobilePrice').innerText;
+   //      const mobilPriceNum = parseInt(mobilePrice);
+   //      const mobilPriceValue = mobilValue * 1219;
+   //      document.getElementById('mobilePrice').innerText = mobilPriceValue;
+   //   })
+   </script>
+
+</body>
+
+</html>
